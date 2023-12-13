@@ -1,0 +1,213 @@
+/*! minireset.css v0.0.6 | MIT License | github.com/jgthms/minireset.css */
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal
+}
+
+ul {
+    list-style: none
+}
+
+button,
+input,
+select {
+    margin: 0
+}
+
+html {
+    box-sizing: border-box
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit
+}
+
+img,
+video {
+    height: auto;
+    max-width: 100%
+}
+
+iframe {
+    border: 0
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+td,
+th {
+    padding: 0
+}
+
+* {
+    color: #ffff;
+    font-family: sans-serif;
+}
+
+:root {
+    --yellow: #ffb116;
+    --orange: #fc9100;
+    --blue: #003051;
+    --blue2: #004792;
+    --blueSky: #3f7caf;
+}
+html,
+body{
+    min-width: 320px;
+    overflow: hidden;
+    height: 100vh;
+}
+#main {
+    min-width: 320px;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: var(--blue);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.top {
+    display: flex;
+    padding: 10px 20px;
+    border-bottom: solid 1px var(--blueSky);
+}
+
+.player {
+    width: 15%;
+}
+
+.player .photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player .photo img {
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.player.turn .photo img{
+    box-shadow: var(--yellow) 2px 2px 35px;
+}
+.player .photo span {
+    font-weight: 700;
+}
+
+.top .score {
+    /* border: solid; */
+    width: 70%;
+}
+
+.top .score .head {
+    display: flex;
+    justify-content: center;
+
+}
+
+.top .head [class*="play-"] {
+    font-size: 4rem;
+    font-family: "fredoka", sans-serif;
+    font-weight: bold;
+}
+
+.play-1 {
+    color: var(--yellow);
+}
+
+.play-2 {
+    color: var(--blue2);
+}
+
+.top .score .head .data {
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+    color: #fc9100;
+}
+
+.top .score .head .data .span{
+    color: #c7c7c7;
+}
+
+/* Corp du jeu */
+.body{
+    /* padding: 10px 2px; */
+    border: var(--blueSky) 2px solid;
+    margin-top: 20px;
+    align-self: center;
+    max-width: 100vh;
+    overflow: auto;
+    border-radius: 10px;
+}
+::-webkit-scrollbar{
+    width: 0px;
+}
+
+
+
+#table {
+    /* margin: 20px; */
+    /* border: solid rebeccapurple; */
+    /* align-self: center; */
+    /* max-width: 100vh; */
+    overflow: auto;
+}
+
+.box {
+    border: solid 1px var(--blueSky);
+}
+
+.box {
+    font-family: "fredoka", sans-serif;
+    font-size: 2em;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 760px) {
+    #table {
+        margin: 20px;
+    }
+}
