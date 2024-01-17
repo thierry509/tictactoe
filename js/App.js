@@ -1,7 +1,5 @@
 import { Game } from "./Game.js";
-import { Graphic } from "./Graphic.js";
-new Graphic().build(20, 50)
-const game = new Game();
+const game = new Game(17);
 game.launch();
 let coup = new Array();
 
@@ -19,12 +17,6 @@ function coordElement(target) {
 function targetElement(coord = []) {
     return document.querySelectorAll('.box')
 }
-
-
-
-
-
-
 
 function verifiWin(target) {
 

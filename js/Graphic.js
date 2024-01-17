@@ -1,14 +1,14 @@
 export class Graphic {
-    build(row, col) {
+    build(cases) {
         let table = document.querySelector('#table');
-        let cases = 10;
         table.style.display = 'grid';
-        table.style.gridTemplateColumns = "repeat(" + row + ", 31px)";
-        table.style.gridTemplateRows = "repeat(" + col + ", 31px)";
+        table.style.gridTemplateColumns = "repeat(" + cases + ", 31px)";
+        table.style.gridTemplateRows = "repeat(" + cases + ", 31px)";
         let element = new Array();
-        for (let i = 0; i < row; i++) {
-            for (let j = 0; j < col; j++) {
-                element.push(this.createElement('div', ['box', i, j]));
+        for (let i = 0; i < cases; i++) {
+            for (let j = 0; j < cases; j++) {
+                let position = `${i},${j}`;
+                element.push(this.createElement('div', position, ['box']));
             }
         }
         element.map(elem => {
@@ -17,8 +17,9 @@ export class Graphic {
         );
     }
 
-    createElement = (tagName, classNames) => {
+    createElement = (tagName, id, classNames) => {
         let elem = document.createElement(tagName)
+        elem.id = id
         classNames.map(className =>
             elem.classList.add(className)
         );

@@ -87,6 +87,7 @@ th {
     --blue: #003051;
     --blue2: #004792;
     --blueSky: #3f7caf;
+    --white: #fff;
 }
 html,
 body{
@@ -151,12 +152,14 @@ body{
     font-weight: bold;
 }
 
-.play-1 {
+.play-1,
+.box.play-1 {
     color: var(--yellow);
 }
 
-.play-2 {
-    color: var(--blue2);
+.play-2,
+.box .play-2{
+    color: var(--white);
 }
 
 .top .score .head .data {
@@ -197,13 +200,11 @@ body{
 
 .box {
     border: solid 1px var(--blueSky);
-}
-
-.box {
     font-family: "fredoka", sans-serif;
     font-size: 2em;
     text-align: center;
-    font-weight: bold;
+    font-weight: 900;
+    cursor: pointer;
 }
 
 @media only screen and (min-width: 760px) {
