@@ -10,10 +10,12 @@ export class Player{
         this.name = name;
         this.letter = letter
         this.score = 0;
+        this.thisCoord = ''
         this.avatar = avatar || 'default.png';
     }
 
     win(){
         this.score += 1;
     }
+
 }

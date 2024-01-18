@@ -3,6 +3,12 @@ const game = new Game(17);
 game.launch();
 let coup = new Array();
 
+
+
+
+
+
+
 function fillWin(cases) {
 
 }
