@@ -55,7 +55,6 @@ export class Game {
     addPions(box) {
         if (box.textContent.trim() === '') {
             box.innerText = this.roundPlayer.letter;
-            this.roundPlayer.thisCoord = box.id;
             if (this.roundPlayer === this.player1) {
                 box.classList.add('play-1')
                 box.classList.add(this.player1.id)
@@ -69,7 +68,7 @@ export class Game {
             this.countPionPlay++
             if (this.countPionPlay > 8) {
                 let finalResult
-                if ((finalResult = this.verify()) != null) {
+                if ((finalResult = this.verify(box.id)) != null) {
                     alert(finalResult.name + " is Wining");
                 }
             }
@@ -81,7 +80,7 @@ export class Game {
     }
 
 
-    verify() {
+    verify(cases) {
         const winPions = 5
         let left = 0.4, right = 4.0, both = 4.4;
         const tableWinnerVerify = [
@@ -100,9 +99,9 @@ export class Game {
             console.log("-----------------------------------------------------------------------")
             console.log("direction : " + direction)
 
-            let coordFar = parseFloat(this.roundPlayer.thisCoord.split(',').join('.')) + (4 * direction)
+            let coordFar = parseFloat(cases.split(',').join('.')) + (4 * direction)
 
-            console.log(" coordornnes du pion actuel " + this.roundPlayer.thisCoord)
+            console.log(" coordornnes du pion actuel " + cases)
             console.log(" coordornnes de loin : " + coordFar)
 
             for (let i = 0; i < winPions; i++) {
@@ -130,7 +129,7 @@ export class Game {
 
             }
 
-            if (parseFloat(coordFar) == parseFloat(this.roundPlayer.thisCoord)) {
+            if (parseFloat(coordFar) == parseFloat(cases)) {
                 return this.roundPlayer
             }
         }
