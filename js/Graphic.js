@@ -25,4 +25,10 @@ export class Graphic {
         );
         return elem;
     }
+
+    clearBox = () => {
+        document.querySelectorAll('.box').forEach((item)=>{
+            item.textContent = ""
+        });
+    }
 }
