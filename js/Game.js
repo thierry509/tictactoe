@@ -90,42 +90,62 @@ export class Game {
         let position = cases.split(',')
         console.log(" coordornnes du pion actuel : " + position[0] + ',' + position[1])
 
-        const monConst = 2
+        const monConst = 4
         for (let i = 0; i < monConst; i++) {
 
-            let initialPosition = parseInt(position[(monConst - (i + 1))]),
-                index = 0,
-                contenuElem
-            console.log("retenu : " + initialPosition)
+            let initialPosition
+            let index = 0
+            let contenuElem
+
+            if (i < 2) {
+                initialPosition = parseInt(position[((monConst-2) - (i + 1))])
+            }
+            if (i >= 2) {
+                initialPosition = [parseInt(position[0]), parseInt(position[1])]
+            }
 
 
             console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
             do {
 
-                initialPosition += -tableWinnerVerify[0]
                 if (i == 0) {
-                    console.log("EN HORIZONTAL")
-                    console.log(" coordornnes du nouveau pion: " + position[0] + ',' + initialPosition)
+                    initialPosition += -tableWinnerVerify[0]
                 }
                 if (i == 1) {
-                    console.log("EN VERTICAL")
-                    console.log(" coordornnes du nouveau pion: " + initialPosition + ',' + position[1])
+                    initialPosition += -tableWinnerVerify[0]
+                }
+
+                if (i >= 2) {
+                    if (i == 2) {
+                        console.log("EN DIAGONAL PRINCIPALE")
+                        initialPosition[0] += -tableWinnerVerify[0]
+                        initialPosition[1] += -tableWinnerVerify[0]
+                    } else {
+                        console.log("EN DIAGONAL secondaire")
+                        initialPosition[0] += -tableWinnerVerify[0]
+                        initialPosition[1] += tableWinnerVerify[0]
+                    }
+                    console.log(" coordornnes du nouveau pion: " + initialPosition.join(','))
 
                 }
 
-                if (initialPosition >= 0) {
+                if ((i < 2 && initialPosition >= 0) || (i >= 2 && initialPosition[0] >= 0 && initialPosition[1] >= 0)) {
+
                     let farPionCaseSTR
                     /*variable ayant tenu l'id a rechercher*/
                     if (i == 0) {
-                        console.log("EN HORIZONTAL")
                         farPionCaseSTR = position[0] + ',' + initialPosition
                     }
                     if (i == 1) {
-                        console.log("EN VERTICAL")
                         farPionCaseSTR = initialPosition + ',' + position[1]
                     }
 
-                    console.log("ID construit : " + farPionCaseSTR)
+                    if (i >= 2) {
+                        console.log("EN DIAGONAL")
+                        farPionCaseSTR = initialPosition.join(',')
+                        console.log("ID construit : " + farPionCaseSTR)
+                    }
+
 
                     contenuElem = document.getElementById(farPionCaseSTR).textContent;
                     console.log("contenu element trouver : " + contenuElem)
@@ -133,21 +153,44 @@ export class Game {
 
             } while (contenuElem == this.roundPlayer.letter);
 
-            initialPosition += tableWinnerVerify[0]
+
             if (i == 0) {
-                console.log("coordonnees du pion retenu : " + position[0] + ',' + initialPosition)
+                initialPosition += tableWinnerVerify[0]
             }
             if (i == 1) {
-                console.log("coordonnees du pion retenu : " + initialPosition + ',' + position[1])
+                initialPosition += tableWinnerVerify[0]
+            }
+            if (i >= 2) {
+                if (i == 2) {
+                    initialPosition[0] += tableWinnerVerify[0]
+                    initialPosition[1] += tableWinnerVerify[0]
+                } else {
+                    initialPosition[0] += tableWinnerVerify[0]
+                    initialPosition[1] += -tableWinnerVerify[0]
+                }
+                console.log("coordonnees du pion retenu : " + initialPosition.join(','))
+                console.log(">>>>>>>>>>>>>>>>>>>>>>>>>")
             }
 
-            console.log(">>>>>>>>>>>>>>>>>>>>>>>>>")
 
 
             do {
-                initialPosition += tableWinnerVerify[0]
+                if(i<2){
+                    initialPosition += tableWinnerVerify[0]
+                }else{
+                    if (i == 2) {
+                        console.log("EN DIAGONAL PRINCIPALE")
+                        initialPosition[0] += tableWinnerVerify[0]
+                        initialPosition[1] += tableWinnerVerify[0]
+                    } else {
+                        console.log("EN DIAGONAL secondaire")
+                        initialPosition[0] += tableWinnerVerify[0]
+                        initialPosition[1] += -tableWinnerVerify[0]
+                    }
+                    console.log(" coordornnes du nouveau pion: " + initialPosition.join(','))
+                }
 
-                if (initialPosition <= 16) {
+                if ((i<2 && initialPosition <= 16) || i>=2 && initialPosition[0] <= 16 && initialPosition[1] <= 16) {
 
                     let farPionCaseSTR
                     /*variable ayant tenu l'id a rechercher*/
@@ -158,11 +201,13 @@ export class Game {
                     if (i == 1) {
                         farPionCaseSTR = initialPosition + ',' + position[1]
                     }
+                    if(i >=2 ){
+                        farPionCaseSTR = initialPosition.join(',')
+                    }
                     console.log("ID construit : " + farPionCaseSTR)
 
                     contenuElem = document.getElementById(farPionCaseSTR).textContent;
                     console.log("contenu element trouver : " + contenuElem)
-
                     index++
                     if (index > 4) {
                         return this.roundPlayer
@@ -181,64 +226,64 @@ export class Game {
 
 
 
-        /**
-         * 
-         * @param {HTMLElement} cases 
-         */
-        verifWin(cases) {
-            let winArray1 = [],
-                winArray2 = [],
-                winArray3 = [],
-                winArray4 = [],
-                winArray5 = [],
-                winArray6 = [],
-                winArray7 = [],
-                winArray8 = [];
+    /**
+     * 
+     * @param {HTMLElement} cases 
+     */
+    verifWin(cases) {
+        let winArray1 = [],
+            winArray2 = [],
+            winArray3 = [],
+            winArray4 = [],
+            winArray5 = [],
+            winArray6 = [],
+            winArray7 = [],
+            winArray8 = [];
 
-            coord = cases.id.split(',');
-            if (coord[0] >= 4) {
-                for (let i = 0; i <= 4; i++) {
-                    if ((coord[0] - i) >= 0) {
-                        winArray1.push(`${coord[0] - i},${coord[1]}`)
-                    }
+        coord = cases.id.split(',');
+        if (coord[0] >= 4) {
+            for (let i = 0; i <= 4; i++) {
+                if ((coord[0] - i) >= 0) {
+                    winArray1.push(`${coord[0] - i},${coord[1]}`)
                 }
             }
-            if (coord[1] >= 5) {
-                for (let i = 0; i <= 4; i++) {
-                    winArray2.push(`${coord[0]},${coord[1] - i}`)
-                }
+        }
+        if (coord[1] >= 5) {
+            for (let i = 0; i <= 4; i++) {
+                winArray2.push(`${coord[0]},${coord[1] - i}`)
             }
-            if (coord[0] <= this.cases - 5) {
-                for (let i = 0; i <= 4; i++) {
-                    winArray3.push(`${parseInt(coord[0]) + 1},${coord[1]}`)
-                }
+        }
+        if (coord[0] <= this.cases - 5) {
+            for (let i = 0; i <= 4; i++) {
+                winArray3.push(`${parseInt(coord[0]) + 1},${coord[1]}`)
             }
-            if (coord[1] <= this.cases - 5) {
-                for (let i = 0; i <= 4; i++) {
-                    winArray4.push(`${coord[0]},${parseInt(coord[1]) + 1}`)
-                }
+        }
+        if (coord[1] <= this.cases - 5) {
+            for (let i = 0; i <= 4; i++) {
+                winArray4.push(`${coord[0]},${parseInt(coord[1]) + 1}`)
             }
-
-            if (this.arrayWin(coord, winArray1) || this.arrayWin(coord, winArray2) ||
-                this.arrayWin(coord, winArray3) || this.arrayWin(coord, winArray4)) {
-                alert("Wining");
-            }
-
-
         }
 
-        arrayWin(coords, list) {
-            let elem = Utils.get(coords)
-            let loop = true, i = 0;
-            while (loop && i < 3) {
-                console.log(elem)
-                if (!(elem.textContent === Utils.get(list[i]).textContent)) {
-                    loop = false;
-                }
-                i++;
-            }
-            console.log();
-            return true;
+        if (this.arrayWin(coord, winArray1) || this.arrayWin(coord, winArray2) ||
+            this.arrayWin(coord, winArray3) || this.arrayWin(coord, winArray4)) {
+            alert("Wining");
         }
+
+
+    }
+
+    arrayWin(coords, list) {
+        let elem = Utils.get(coords)
+        let loop = true, i = 0;
+        while (loop && i < 3) {
+            console.log(elem)
+            if (!(elem.textContent === Utils.get(list[i]).textContent)) {
+                loop = false;
+            }
+            i++;
+        }
+        console.log();
+        return true;
+    }
 
 }
