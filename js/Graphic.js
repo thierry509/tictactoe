@@ -26,7 +26,7 @@ export class Graphic {
         return elem;
     }
 
-    clearBox = () => {
+    static clearBox = () => {
         document.querySelectorAll('.box').forEach((item)=>{
             item.textContent = ""
         });

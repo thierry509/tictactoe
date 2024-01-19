@@ -27,6 +27,7 @@ export class Game {
     launch() {
         this.updateScore();
         let boxes = document.querySelectorAll('.box');
+        this.updateScreen();
         for (let box of boxes) {
             box.addEventListener('click', () => {
                 this.addPions(box)
@@ -67,6 +68,9 @@ export class Game {
             if (this.countPionPlay > 8) {
                 let finalResult
                 if ((finalResult = this.verify(box.id)) != null) {
+                    finalResult.score ++;
+                    Graphic.clearBox();
+                    this.updateScore()
                     alert(finalResult.name + " is Wining");
                 }
             }
@@ -210,6 +214,7 @@ export class Game {
                     console.log("contenu element trouver : " + contenuElem)
                     index++
                     if (index > 4) {
+
                         return this.roundPlayer
                     }
                 }
