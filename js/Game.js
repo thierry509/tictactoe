@@ -92,6 +92,7 @@ export class Game {
         ]
 
         let position = cases.split(',')
+        console.log(" coordornnes du pion actuel : " + position[0] + ',' + position[1])
 
         const monConst = 4
         for (let i = 0; i < monConst; i++) {
@@ -108,6 +109,7 @@ export class Game {
             }
 
 
+            console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
             do {
 
                 if (i == 0) {
@@ -119,12 +121,15 @@ export class Game {
 
                 if (i >= 2) {
                     if (i == 2) {
+                        console.log("EN DIAGONAL PRINCIPALE")
                         initialPosition[0] += -tableWinnerVerify[0]
                         initialPosition[1] += -tableWinnerVerify[0]
                     } else {
+                        console.log("EN DIAGONAL secondaire")
                         initialPosition[0] += -tableWinnerVerify[0]
                         initialPosition[1] += tableWinnerVerify[0]
                     }
+                    console.log(" coordornnes du nouveau pion: " + initialPosition.join(','))
 
                 }
 
@@ -140,11 +145,14 @@ export class Game {
                     }
 
                     if (i >= 2) {
+                        console.log("EN DIAGONAL")
                         farPionCaseSTR = initialPosition.join(',')
+                        console.log("ID construit : " + farPionCaseSTR)
                     }
 
 
                     contenuElem = document.getElementById(farPionCaseSTR).textContent;
+                    console.log("contenu element trouver : " + contenuElem)
                 }
 
             } while (contenuElem == this.roundPlayer.letter);
@@ -164,6 +172,8 @@ export class Game {
                     initialPosition[0] += tableWinnerVerify[0]
                     initialPosition[1] += -tableWinnerVerify[0]
                 }
+                console.log("coordonnees du pion retenu : " + initialPosition.join(','))
+                console.log(">>>>>>>>>>>>>>>>>>>>>>>>>")
             }
 
 
@@ -173,12 +183,15 @@ export class Game {
                     initialPosition += tableWinnerVerify[0]
                 }else{
                     if (i == 2) {
+                        console.log("EN DIAGONAL PRINCIPALE")
                         initialPosition[0] += tableWinnerVerify[0]
                         initialPosition[1] += tableWinnerVerify[0]
                     } else {
+                        console.log("EN DIAGONAL secondaire")
                         initialPosition[0] += tableWinnerVerify[0]
                         initialPosition[1] += -tableWinnerVerify[0]
                     }
+                    console.log(" coordornnes du nouveau pion: " + initialPosition.join(','))
                 }
 
                 if ((i<2 && initialPosition <= 16) || i>=2 && initialPosition[0] <= 16 && initialPosition[1] <= 16) {
@@ -195,8 +208,10 @@ export class Game {
                     if(i >=2 ){
                         farPionCaseSTR = initialPosition.join(',')
                     }
+                    console.log("ID construit : " + farPionCaseSTR)
 
                     contenuElem = document.getElementById(farPionCaseSTR).textContent;
+                    console.log("contenu element trouver : " + contenuElem)
                     index++
                     if (index > 4) {
 
@@ -208,6 +223,8 @@ export class Game {
 
 
         }
+
+        console.log("\n\n\n")
         return null
 
     }
@@ -273,5 +290,4 @@ export class Game {
             console.log();
             return true;
         }
-
 }
