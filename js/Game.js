@@ -96,7 +96,7 @@ export class Game {
         let position = cases.split(','),
             winner = true,
             index = 0,
-        contenuElem
+            contenuElem
         console.log("---------------------------")
         console.log("en verticale")
         console.log("---------------------------")
@@ -111,40 +111,40 @@ export class Game {
         do {
             positionInV += -tableWinnerVerify[0]
             console.log(" coordornnes a gauche: " + position[0] + ',' + positionInV)
-            
-            if(positionInV >= 0){ 
-            
-            /*variable ayant tenu l'id a rechercher*/
-            let farPionCaseSTR = position[0] + ',' + positionInV
-            console.log("ID construit : " + farPionCaseSTR)
 
-            contenuElem = document.getElementById(farPionCaseSTR).textContent;
-            console.log("contenu element trouver : " + contenuElem)
+            if (positionInV >= 0) {
+
+                /*variable ayant tenu l'id a rechercher*/
+                let farPionCaseSTR = position[0] + ',' + positionInV
+                console.log("ID construit : " + farPionCaseSTR)
+
+                contenuElem = document.getElementById(farPionCaseSTR).textContent;
+                console.log("contenu element trouver : " + contenuElem)
 
             }
         } while (contenuElem == this.roundPlayer.letter);
-        
+
         positionInV += tableWinnerVerify[0]
         console.log(" derniere coordornnes a gauche tenu: " + position[0] + ',' + positionInV)
-        
+
         do {
             positionInV += tableWinnerVerify[0]
             console.log(" coordornnes a droite: " + position[0] + ',' + positionInV)
-            
-            if(positionInV <= 16 ){ 
-            
-            /*variable ayant tenu l'id a rechercher*/
-            let farPionCaseSTR = position[0] + ',' + positionInV
-            console.log("ID construit : " + farPionCaseSTR)
 
-            contenuElem = document.getElementById(farPionCaseSTR).textContent;
-            console.log("contenu element trouver : " + contenuElem)
+            if (positionInV <= 16) {
 
-            index++
-            if(index>4){
-                return this.roundPlayer
+                /*variable ayant tenu l'id a rechercher*/
+                let farPionCaseSTR = position[0] + ',' + positionInV
+                console.log("ID construit : " + farPionCaseSTR)
+
+                contenuElem = document.getElementById(farPionCaseSTR).textContent;
+                console.log("contenu element trouver : " + contenuElem)
+
+                index++
+                if (index > 4) {
+                    return this.roundPlayer
+                }
             }
-        }
         } while (contenuElem == this.roundPlayer.letter);
 
 
@@ -163,39 +163,39 @@ export class Game {
 
         do {
             positionInH += -tableWinnerVerify[0]
-            console.log(" coordornnes a en haut: "  + positionInH + ',' + position[1])
+            console.log(" coordornnes a en haut: " + positionInH + ',' + position[1])
 
-            if(positionInH >= 0){ 
-            
-            /*variable ayant tenu l'id a rechercher*/
-            let farPionCaseSTR = positionInH + ',' + position[1]
-            console.log("ID construit : " + farPionCaseSTR)
+            if (positionInH >= 0) {
 
-            contenuElem = document.getElementById(farPionCaseSTR).textContent;
-            console.log("contenu element trouver : " + contenuElem)
+                /*variable ayant tenu l'id a rechercher*/
+                let farPionCaseSTR = positionInH + ',' + position[1]
+                console.log("ID construit : " + farPionCaseSTR)
+
+                contenuElem = document.getElementById(farPionCaseSTR).textContent;
+                console.log("contenu element trouver : " + contenuElem)
             }
         } while (contenuElem == this.roundPlayer.letter);
-        
+
         positionInH += tableWinnerVerify[0]
         console.log(" derniere coordornnes a gauche tenu: " + positionInH + ',' + position[1])
-        
+
         do {
             positionInH += tableWinnerVerify[0]
             console.log(" coordornnes en bas : " + positionInH + ',' + position[1])
-            
-            if(positionInH<= 16){ 
-            /*variable ayant tenu l'id a rechercher*/
-            let farPionCaseSTR = positionInH + ',' + position[1]
-            console.log("ID construit : " + farPionCaseSTR)
 
-            contenuElem = document.getElementById(farPionCaseSTR).textContent;
-            console.log("contenu element trouver : " + contenuElem)
+            if (positionInH <= 16) {
+                /*variable ayant tenu l'id a rechercher*/
+                let farPionCaseSTR = positionInH + ',' + position[1]
+                console.log("ID construit : " + farPionCaseSTR)
 
-            index++
-            if(index>4){
-                return this.roundPlayer
+                contenuElem = document.getElementById(farPionCaseSTR).textContent;
+                console.log("contenu element trouver : " + contenuElem)
+
+                index++
+                if (index > 4) {
+                    return this.roundPlayer
+                }
             }
-        }
         } while (contenuElem == this.roundPlayer.letter);
 
 
@@ -204,61 +204,61 @@ export class Game {
 
 
 
-/**
- * 
- * @param {HTMLElement} cases 
- */
-verifWin(cases) {
-    let winArray1 = [],
-        winArray2 = [],
-        winArray3 = [],
-        winArray4 = [],
-        winArray5 = [],
-        winArray6 = [],
-        winArray7 = [],
-        winArray8 = [];
+    /**
+     * 
+     * @param {HTMLElement} cases 
+     */
+    verifWin(cases) {
+        let winArray1 = [],
+            winArray2 = [],
+            winArray3 = [],
+            winArray4 = [],
+            winArray5 = [],
+            winArray6 = [],
+            winArray7 = [],
+            winArray8 = [];
 
-    const coord = cases.id.split(',');
-    if (coord[0] >= 4) {
-        for (let i = 0; i <= 4; i++) {
-            if ((coord[0] - i) >= 0) {
-                winArray1.push(`${coord[0] - i},${coord[1]}`)
+        const coord = cases.id.split(',');
+        if (coord[0] >= 4) {
+            for (let i = 0; i <= 4; i++) {
+                if ((coord[0] - i) >= 0) {
+                    winArray1.push(`${coord[0] - i},${coord[1]}`)
+                }
             }
         }
-    }
-    if (coord[1] >= 5) {
-        for (let i = 0; i <= 4; i++) {
-            winArray2.push(`${coord[0]},${coord[1] - i}`)
+        if (coord[1] >= 5) {
+            for (let i = 0; i <= 4; i++) {
+                winArray2.push(`${coord[0]},${coord[1] - i}`)
+            }
         }
-    }
-    if (coord[0] <= this.cases - 5) {
-        for (let i = 0; i <= 4; i++) {
-            winArray3.push(`${parseInt(coord[0]) + 1},${coord[1]}`)
+        if (coord[0] <= this.cases - 5) {
+            for (let i = 0; i <= 4; i++) {
+                winArray3.push(`${parseInt(coord[0]) + 1},${coord[1]}`)
+            }
         }
-    }
-    if (coord[1] <= this.cases - 5) {
-        for (let i = 0; i <= 4; i++) {
-            winArray4.push(`${coord[0]},${parseInt(coord[1]) + 1}`)
+        if (coord[1] <= this.cases - 5) {
+            for (let i = 0; i <= 4; i++) {
+                winArray4.push(`${coord[0]},${parseInt(coord[1]) + 1}`)
+            }
+        }
+
+        if (this.arrayWin(coord, winArray1) || this.arrayWin(coord, winArray2) ||
+            this.arrayWin(coord, winArray3) || this.arrayWin(coord, winArray4)) {
+            alert("Wining");
         }
     }
 
-    if (this.arrayWin(coord, winArray1) || this.arrayWin(coord, winArray2) ||
-        this.arrayWin(coord, winArray3) || this.arrayWin(coord, winArray4)) {
-        alert("Wining");
-    }
-}
-
-arrayWin(coords, list) {
-    let elem = Utils.get(coords)
-    let loop = true, i = 0;
-    while (loop && i < 3) {
-        console.log(elem)
-        if (!(elem.textContent === Utils.get(list[i]).textContent)) {
-            loop = false;
+    arrayWin(coords, list) {
+        let elem = Utils.get(coords)
+        let loop = true, i = 0;
+        while (loop && i < 3) {
+            console.log(elem)
+            if (!(elem.textContent === Utils.get(list[i]).textContent)) {
+                loop = false;
+            }
+            i++;
         }
-        i++;
+        console.log();
+        return true;
     }
-    console.log();
-    return true;
-}
 }
