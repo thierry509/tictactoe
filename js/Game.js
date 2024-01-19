@@ -57,12 +57,10 @@ export class Game {
             box.innerText = this.roundPlayer.letter;
             if (this.roundPlayer === this.player1) {
                 box.classList.add('play-1')
-                box.classList.add(this.player1.id)
 
             }
             else if (this.roundPlayer === this.player2) {
                 box.classList.add('play-2')
-                box.classList.add(this.player2.id)
 
             }
             this.countPionPlay++
@@ -95,10 +93,10 @@ export class Game {
         const monConst = 2
         for (let i = 0; i < monConst; i++) {
 
-            let initialPosition = parseInt(position[(monConst-(i+1))]),
+            let initialPosition = parseInt(position[(monConst - (i + 1))]),
                 index = 0,
                 contenuElem
-            console.log("retenu : " + initialPosition )
+            console.log("retenu : " + initialPosition)
 
 
             console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
@@ -178,109 +176,69 @@ export class Game {
 
         console.log("\n\n\n")
         return null
-        
+
     }
 
 
 
-    /**
-     * 
-     * @param {HTMLElement} cases 
-     */
-    verifWin(cases) {
-        let winArray1 = [],
-            winArray2 = [],
-            winArray3 = [],
-            winArray4 = [],
-            winArray5 = [],
-            winArray6 = [],
-            winArray7 = [],
-            winArray8 = [];
+        /**
+         * 
+         * @param {HTMLElement} cases 
+         */
+        verifWin(cases) {
+            let winArray1 = [],
+                winArray2 = [],
+                winArray3 = [],
+                winArray4 = [],
+                winArray5 = [],
+                winArray6 = [],
+                winArray7 = [],
+                winArray8 = [];
 
-        coord = cases.id.split(',');
-        if (coord[0] >= 4) {
-            for (let i = 0; i <= 4; i++) {
-                if ((coord[0] - i) >= 0) {
-                    winArray1.push(`${coord[0] - i},${coord[1]}`)
+            coord = cases.id.split(',');
+            if (coord[0] >= 4) {
+                for (let i = 0; i <= 4; i++) {
+                    if ((coord[0] - i) >= 0) {
+                        winArray1.push(`${coord[0] - i},${coord[1]}`)
+                    }
                 }
             }
-        }
-        if (coord[1] >= 5) {
-            for (let i = 0; i <= 4; i++) {
-                winArray2.push(`${coord[0]},${coord[1] - i}`)
-            }
-        }
-        if (coord[0] <= this.cases - 5) {
-            for (let i = 0; i <= 4; i++) {
-                winArray3.push(`${parseInt(coord[0]) + 1},${coord[1]}`)
-            }
-        }
-        if (coord[1] <= this.cases - 5) {
-            for (let i = 0; i <= 4; i++) {
-                winArray4.push(`${coord[0]},${parseInt(coord[1]) + 1}`)
-            }
-        }
-        const coord = cases.id.split(',');
-        if (coord[0] >= 4) {
-            for (let i = 0; i <= 4; i++) {
-                if ((coord[0] - i) >= 0) {
-                    winArray1.push(`${coord[0] - i},${coord[1]}`)
+            if (coord[1] >= 5) {
+                for (let i = 0; i <= 4; i++) {
+                    winArray2.push(`${coord[0]},${coord[1] - i}`)
                 }
             }
-        }
-        if (coord[1] >= 5) {
-            for (let i = 0; i <= 4; i++) {
-                winArray2.push(`${coord[0]},${coord[1] - i}`)
+            if (coord[0] <= this.cases - 5) {
+                for (let i = 0; i <= 4; i++) {
+                    winArray3.push(`${parseInt(coord[0]) + 1},${coord[1]}`)
+                }
             }
-        }
-        if (coord[0] <= this.cases - 5) {
-            for (let i = 0; i <= 4; i++) {
-                winArray3.push(`${parseInt(coord[0]) + 1},${coord[1]}`)
+            if (coord[1] <= this.cases - 5) {
+                for (let i = 0; i <= 4; i++) {
+                    winArray4.push(`${coord[0]},${parseInt(coord[1]) + 1}`)
+                }
             }
-        }
-        if (coord[1] <= this.cases - 5) {
-            for (let i = 0; i <= 4; i++) {
-                winArray4.push(`${coord[0]},${parseInt(coord[1]) + 1}`)
+
+            if (this.arrayWin(coord, winArray1) || this.arrayWin(coord, winArray2) ||
+                this.arrayWin(coord, winArray3) || this.arrayWin(coord, winArray4)) {
+                alert("Wining");
             }
+
+
         }
 
-        if (this.arrayWin(coord, winArray1) || this.arrayWin(coord, winArray2) ||
-            this.arrayWin(coord, winArray3) || this.arrayWin(coord, winArray4)) {
-            alert("Wining");
+        arrayWin(coords, list) {
+            let elem = Utils.get(coords)
+            let loop = true, i = 0;
+            while (loop && i < 3) {
+                console.log(elem)
+                if (!(elem.textContent === Utils.get(list[i]).textContent)) {
+                    loop = false;
+                }
+                i++;
+            }
+            console.log();
+            return true;
         }
-    
-        if (this.arrayWin(coord, winArray1) || this.arrayWin(coord, winArray2) ||
-            this.arrayWin(coord, winArray3) || this.arrayWin(coord, winArray4)) {
-            alert("Wining");
-        }
-    
 
-    }
-    
-    arrayWin(coords, list) {
-        let elem = Utils.get(coords)
-        let loop = true, i = 0;
-        while (loop && i < 3) {
-            console.log(elem)
-            if (!(elem.textContent === Utils.get(list[i]).textContent)) {
-                loop = false;
-            }
-            i++;
-        }
-        console.log();
-        return true;
-    }
-    arrayWin(coords, list) {
-        let elem = Utils.get(coords)
-        let loop = true, i = 0;
-        while (loop && i < 3) {
-            console.log(elem)
-            if (!(elem.textContent === Utils.get(list[i]).textContent)) {
-                loop = false;
-            }
-            i++;
-        }
-        console.log();
-        return true;
-    }
 }
