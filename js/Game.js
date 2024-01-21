@@ -68,7 +68,7 @@ export class Game {
             if (this.countPionPlay > 8) {
                 let finalResult
                 if ((finalResult = this.verify(box.id)) != null) {
-                    finalResult.score ++;
+                    finalResult.score++;
                     Graphic.clearBox();
                     this.updateScore()
                     alert(finalResult.name + " is Wining");
@@ -84,128 +84,123 @@ export class Game {
 
     verify(cases) {
 
+        const STEP = 1,
+            MIN = 0,
+            MAX = 16,
+            POSITION = cases.split(','),
+            MON_CONST = 4
 
-        const tableWinnerVerify = [
-            /* "O" || "E" || "N" || "S" */ + 1,
-            /* "NO" || "SE": */[+1, -1],
-            /* "NE" ||  "SO": */[-1, +1]
-        ]
+        for (let i = 0; i < MON_CONST; i++) {
 
-        let position = cases.split(',')
-
-        const monConst = 4
-        for (let i = 0; i < monConst; i++) {
-
-            let initialPosition
-            let index = 0
-            let contenuElem
+            let actual_position_pion,
+                count_five_align_pion = 0,
+                content_element
 
             if (i < 2) {
-                initialPosition = parseInt(position[((monConst-2) - (i + 1))])
+                actual_position_pion = parseInt(POSITION[((MON_CONST - 2) - (i + 1))])
             }
             if (i >= 2) {
-                initialPosition = [parseInt(position[0]), parseInt(position[1])]
+                actual_position_pion = [parseInt(POSITION[0]), parseInt(POSITION[1])]
             }
 
 
             do {
 
+                content_element = ''
                 if (i == 0) {
-                    initialPosition += -tableWinnerVerify[0]
+                    actual_position_pion += -STEP
                 }
                 if (i == 1) {
-                    initialPosition += -tableWinnerVerify[0]
+                    actual_position_pion += -STEP
                 }
 
                 if (i >= 2) {
                     if (i == 2) {
-                        initialPosition[0] += -tableWinnerVerify[0]
-                        initialPosition[1] += -tableWinnerVerify[0]
+                        actual_position_pion[0] += -STEP
+                        actual_position_pion[1] += -STEP
                     } else {
-                        initialPosition[0] += -tableWinnerVerify[0]
-                        initialPosition[1] += tableWinnerVerify[0]
+                        actual_position_pion[0] += -STEP
+                        actual_position_pion[1] += STEP
                     }
 
                 }
 
-                if ((i < 2 && initialPosition >= 0) || (i >= 2 && initialPosition[0] >= 0 && initialPosition[1] >= 0)) {
+                if ((i < 2 && actual_position_pion >= MIN) || (i >= 2 && actual_position_pion[0] >= MIN && actual_position_pion[1] >= MIN)) {
 
-                    let farPionCaseSTR
+                    let ID_actual_pion
                     /*variable ayant tenu l'id a rechercher*/
                     if (i == 0) {
-                        farPionCaseSTR = position[0] + ',' + initialPosition
+                        ID_actual_pion = POSITION[0] + ',' + actual_position_pion
                     }
                     if (i == 1) {
-                        farPionCaseSTR = initialPosition + ',' + position[1]
+                        ID_actual_pion = actual_position_pion + ',' + POSITION[1]
                     }
 
                     if (i >= 2) {
-                        farPionCaseSTR = initialPosition.join(',')
+                        ID_actual_pion = actual_position_pion.join(',')
                     }
 
 
-                    contenuElem = document.getElementById(farPionCaseSTR).textContent;
+                    content_element = document.getElementById(ID_actual_pion).textContent;
                 }
 
-            } while (contenuElem == this.roundPlayer.letter);
+            } while (content_element == this.roundPlayer.letter);
 
 
             if (i == 0) {
-                initialPosition += tableWinnerVerify[0]
+                actual_position_pion += STEP
             }
             if (i == 1) {
-                initialPosition += tableWinnerVerify[0]
+                actual_position_pion += STEP
             }
             if (i >= 2) {
                 if (i == 2) {
-                    initialPosition[0] += tableWinnerVerify[0]
-                    initialPosition[1] += tableWinnerVerify[0]
+                    actual_position_pion[0] += STEP
+                    actual_position_pion[1] += STEP
                 } else {
-                    initialPosition[0] += tableWinnerVerify[0]
-                    initialPosition[1] += -tableWinnerVerify[0]
+                    actual_position_pion[0] += STEP
+                    actual_position_pion[1] += -STEP
                 }
             }
 
 
 
             do {
-                if(i<2){
-                    initialPosition += tableWinnerVerify[0]
-                }else{
+                content_element = ''
+                if (i < 2) {
+                    actual_position_pion += STEP
+                } else {
                     if (i == 2) {
-                        initialPosition[0] += tableWinnerVerify[0]
-                        initialPosition[1] += tableWinnerVerify[0]
+                        actual_position_pion[0] += STEP
+                        actual_position_pion[1] += STEP
                     } else {
-                        initialPosition[0] += tableWinnerVerify[0]
-                        initialPosition[1] += -tableWinnerVerify[0]
+                        actual_position_pion[0] += STEP
+                        actual_position_pion[1] += -STEP
                     }
                 }
 
-                if ((i<2 && initialPosition <= 16) || i>=2 && initialPosition[0] <= 16 && initialPosition[1] <= 16) {
+                if ((i < 2 && actual_position_pion <= MAX) || i >= 2 && actual_position_pion[0] <= MAX && actual_position_pion[1] <= MAX) {
 
-                    let farPionCaseSTR
-                    /*variable ayant tenu l'id a rechercher*/
-
+                    let ID_actual_pion
+                    
                     if (i == 0) {
-                        farPionCaseSTR = position[0] + ',' + initialPosition
+                        ID_actual_pion = POSITION[0] + ',' + actual_position_pion
                     }
                     if (i == 1) {
-                        farPionCaseSTR = initialPosition + ',' + position[1]
+                        ID_actual_pion = actual_position_pion + ',' + POSITION[1]
                     }
-                    if(i >=2 ){
-                        farPionCaseSTR = initialPosition.join(',')
+                    if (i >= 2) {
+                        ID_actual_pion = actual_position_pion.join(',')
                     }
 
-                    contenuElem = document.getElementById(farPionCaseSTR).textContent;
-                    index++
-                    if (index > 4) {
+                    content_element = document.getElementById(ID_actual_pion).textContent;
+                    count_five_align_pion++
+                    if (count_five_align_pion > 4) {
 
                         return this.roundPlayer
                     }
                 }
-            } while (contenuElem == this.roundPlayer.letter);
-
-
+            } while (content_element == this.roundPlayer.letter);
 
         }
         return null
@@ -213,64 +208,4 @@ export class Game {
     }
 
 
-
-        /**
-         * 
-         * @param {HTMLElement} cases 
-         */
-        verifWin(cases) {
-            let winArray1 = [],
-                winArray2 = [],
-                winArray3 = [],
-                winArray4 = [],
-                winArray5 = [],
-                winArray6 = [],
-                winArray7 = [],
-                winArray8 = [];
-
-            coord = cases.id.split(',');
-            if (coord[0] >= 4) {
-                for (let i = 0; i <= 4; i++) {
-                    if ((coord[0] - i) >= 0) {
-                        winArray1.push(`${coord[0] - i},${coord[1]}`)
-                    }
-                }
-            }
-            if (coord[1] >= 5) {
-                for (let i = 0; i <= 4; i++) {
-                    winArray2.push(`${coord[0]},${coord[1] - i}`)
-                }
-            }
-            if (coord[0] <= this.cases - 5) {
-                for (let i = 0; i <= 4; i++) {
-                    winArray3.push(`${parseInt(coord[0]) + 1},${coord[1]}`)
-                }
-            }
-            if (coord[1] <= this.cases - 5) {
-                for (let i = 0; i <= 4; i++) {
-                    winArray4.push(`${coord[0]},${parseInt(coord[1]) + 1}`)
-                }
-            }
-
-            if (this.arrayWin(coord, winArray1) || this.arrayWin(coord, winArray2) ||
-                this.arrayWin(coord, winArray3) || this.arrayWin(coord, winArray4)) {
-                alert("Wining");
-            }
-
-
-        }
-
-        arrayWin(coords, list) {
-            let elem = Utils.get(coords)
-            let loop = true, i = 0;
-            while (loop && i < 3) {
-                console.log(elem)
-                if (!(elem.textContent === Utils.get(list[i]).textContent)) {
-                    loop = false;
-                }
-                i++;
-            }
-            console.log();
-            return true;
-        }
 }
