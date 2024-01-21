@@ -54,7 +54,7 @@ export class Game {
      * @param {HTMLElement} box 
      */
     addPions(box) {
-        if (box.textContent.trim() === '') {
+        if (box.textContent.trim() === "") {
             box.innerText = this.roundPlayer.letter;
             if (this.roundPlayer === this.player1) {
                 box.classList.add('play-1')
